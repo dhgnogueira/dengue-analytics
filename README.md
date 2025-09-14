@@ -1,3 +1,36 @@
+# dengue-analytics
+
+Dashboard para estudo sobre dengue.
+
+Este projeto utiliza Streamlit para visualização interativa dos dados de casos de dengue, com filtros por município e ano, gráficos e tabelas. O ambiente é preparado para rodar em container Docker via Docker Compose.
+
+## Como rodar
+
+1. Instale o Docker e o Docker Compose.
+2. Execute:
+   ```bash
+   docker compose up --build
+   ```
+3. Acesse o dashboard em http://localhost:8501
+
+## Estrutura
+- src/dashboard/app.py: código do dashboard
+- src/dashboard/service/: serviços para mostrar os gráficos na dashboard
+- src/data/: dados CSV
+- Dockerfile e docker-compose.yml: configuração dos containers
+
+## Dependências
+- Python 3.13
+- Streamlit
+- Pandas
+- Plotly
+- Poetry
+- Docker
+- Docker Compose
+
+## Autor
+Denise H G Nogueira
+
 ## 🚀 Como Executar o Projeto Localmente
 
 ### Pré-requisitos
