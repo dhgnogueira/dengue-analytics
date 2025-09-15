@@ -1,4 +1,6 @@
 import re
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 import streamlit as st
@@ -11,6 +13,9 @@ from services.rmvp_analysis import show_rmvp_analysis
 
 st.set_page_config(page_title="Dashboard Dengue", layout="wide")
 st.title("Dashboard de Casos de Dengue")
+st.subheader(
+    f"Última atualização: {datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%d-%b-%Y')}"
+)
 
 
 def main_dashboard():
