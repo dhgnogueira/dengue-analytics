@@ -13,8 +13,9 @@ from services.rmvp_analysis import show_rmvp_analysis
 
 st.set_page_config(page_title="Dashboard Dengue", layout="wide")
 st.title("Dashboard de Casos de Dengue")
-st.subheader(
-    f"Última atualização: {datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%d-%b-%Y')}"
+st.markdown(
+    f"<h6>Última atualização: {datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%d-%b-%Y')}</h6>",
+    unsafe_allow_html=True,
 )
 
 
