@@ -17,5 +17,5 @@ poetry-export:
 
 
 run: init
-	@poetry run streamlit run src/app/app.py
+	@poetry run streamlit run src/dashboard/app.py
 
