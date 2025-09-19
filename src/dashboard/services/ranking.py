@@ -3,6 +3,7 @@ import streamlit as st
 
 
 def show_ranking(df_rmvp, municipality_col, years):
+    st.header("Top 10 municípios com mais casos")
     ano_ranking = st.selectbox("Selecione o ano para ranking", years)
     df_ranking = df_rmvp[df_rmvp["Ano"] == ano_ranking]
     df_ranking = df_ranking[
@@ -16,7 +17,7 @@ def show_ranking(df_rmvp, municipality_col, years):
         top_municipios,
         x=municipality_col,
         y="Total",
-        title=f"Top 10 municípios com mais casos em {ano_ranking}",
         labels={municipality_col: "Município", "Total": "Casos"},
+        title=f"Top 10 municípios com mais casos em {ano_ranking}",
     )
     st.plotly_chart(fig_ranking, use_container_width=True)

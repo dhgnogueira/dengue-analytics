@@ -7,6 +7,7 @@ import streamlit as st
 from services.comparison import show_comparison
 from services.evolution import show_evolution
 from services.forecast import show_forecast
+from services.incidence_rmvp import show_incidence_rmvp
 from services.indicators import show_indicators
 from services.ranking import show_ranking
 from services.rmvp_analysis import show_rmvp_analysis
@@ -36,16 +37,40 @@ def main_dashboard():
     municipalities = sorted(municipalities_vale)
 
     df_rmvp_filtered = df_rmvp[~df_rmvp[municipality_col].isin(["SÃO PAULO", "SAO PAULO"])]
+
+    # 1. Indicadores resumidos (cards)
     show_indicators(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col)
-    show_rmvp_analysis(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, months=months)
+
+    # 2. Gráfico de previsão (real vs previsto)
     show_forecast(df_rmvp=df_rmvp_filtered)
-    show_evolution(
-        df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, municipalities=municipalities
-    )
-    show_ranking(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, years=years)
-    show_comparison(
-        df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, municipalities=municipalities
-    )
+
+    # 3. Gráfico de incidência/casos (lado a lado)
+    col1, col2 = st.columns(2)
+    with col1:
+        show_incidence_rmvp()
+    with col2:
+        show_comparison(
+            df_rmvp=df_rmvp_filtered,
+            municipality_col=municipality_col,
+            municipalities=municipalities,
+        )
+
+    # 4. Ranking de municípios e evolução temporal (em colunas)
+    col3, col4 = st.columns(2)
+    with col3:
+        show_ranking(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, years=years)
+    with col4:
+        show_evolution(
+            df_rmvp=df_rmvp_filtered,
+            municipality_col=municipality_col,
+            municipalities=municipalities,
+        )
+
+    # 5. Análise RMVP
+    show_rmvp_analysis(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, months=months)
+
+    # 6. (Futuro) Botão de download pode ser adicionado ao final
+    # st.download_button(...)
 
 
 if __name__ == "__main__":

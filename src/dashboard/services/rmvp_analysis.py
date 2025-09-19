@@ -5,8 +5,11 @@ import streamlit as st
 def show_rmvp_analysis(df_rmvp, municipality_col, months):
     st.header("Análise RMVP (Região Metropolitana do Vale do Paraíba)")
     municipios_rmvp = sorted(df_rmvp[municipality_col].unique())
-    ano_rmvp = st.sidebar.selectbox("Ano (RMVP)", sorted(df_rmvp["Ano"].unique()))
-    municipio_rmvp = st.sidebar.selectbox("Município (RMVP)", municipios_rmvp)
+    col1, col2 = st.columns(2)
+    with col1:
+        ano_rmvp = st.selectbox("Ano (RMVP)", sorted(df_rmvp["Ano"].unique()))
+    with col2:
+        municipio_rmvp = st.selectbox("Município (RMVP)", municipios_rmvp)
     df_rmvp_filtrado = df_rmvp[
         (df_rmvp[municipality_col] == municipio_rmvp) & (df_rmvp["Ano"] == ano_rmvp)
     ]
