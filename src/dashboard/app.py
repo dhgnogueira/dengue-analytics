@@ -38,11 +38,11 @@ def main_dashboard():
 
     df_rmvp_filtered = df_rmvp[~df_rmvp[municipality_col].isin(["SÃO PAULO", "SAO PAULO"])]
 
-    # 1. Indicadores resumidos (cards)
-    show_indicators(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col)
-
-    # 2. Gráfico de previsão (real vs previsto)
+    # 1. Gráfico de previsão (real vs previsto) - DESTAQUE NO TOPO
     show_forecast(df_rmvp=df_rmvp_filtered)
+
+    # 2. Indicadores resumidos (cards)
+    show_indicators(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col)
 
     # 3. Gráfico de incidência/casos (lado a lado)
     col1, col2 = st.columns(2)
@@ -68,9 +68,6 @@ def main_dashboard():
 
     # 5. Análise RMVP
     show_rmvp_analysis(df_rmvp=df_rmvp_filtered, municipality_col=municipality_col, months=months)
-
-    # 6. (Futuro) Botão de download pode ser adicionado ao final
-    # st.download_button(...)
 
 
 if __name__ == "__main__":
